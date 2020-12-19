@@ -158,6 +158,19 @@ const nestedObjList = [
 ]
 matchSorter(nestedObjList, 'j', {keys: ['name.0.first']})
 // [{name: {first: 'Janice'}}, {name: {first: 'Jen'}}]
+
+const nestedObjList = [
+  {aliases: [{name: {first: 'Janice'}},{name: {first: 'Jen'}}]},
+  {aliases: [{name: {first: 'Fred'}},{name: {first: 'Frederic'}}]},
+  {aliases: [{name: {first: 'George'}},{name: {first: 'Georgie'}}]},
+]
+matchSorter(nestedObjList, 'jen', {keys: ['aliases.*.name.first']})
+// [{aliases: [{name: {first: 'Janice'}},{name: {first: 'Jen'}}]}]
+matchSorter(nestedObjList, 'jen', {keys: ['aliases.name.first']})
+// [{aliases: [{name: {first: 'Janice'}},{name: {first: 'Jen'}}]}]
+matchSorter(nestedObjList, 'jen', {keys: ['aliases.0.name.first']})
+// []
+
 // matchSorter(nestedObjList, 'j', {keys: ['name[0].first']}) does not work
 ```
 
